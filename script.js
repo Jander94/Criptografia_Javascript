@@ -1,4 +1,5 @@
 const readline = require("readline");
+const { alfabetoCompleto } = require("./utils");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -8,34 +9,8 @@ let opcao;
 let texto;
 let numero;
 let textoCriptografado;
-const alfabeto = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
+const alfabeto = alfabetoCompleto;
+
 rl.question("1 - Criptografar \n2 - Descriptografar\n", (opt) => {
   opcao = opt;
   if (opcao == 1) {
@@ -68,12 +43,12 @@ rl.question("1 - Criptografar \n2 - Descriptografar\n", (opt) => {
 const criptografar = () => {
   let arrayMsg = texto.split("");
   let arrayCritp = [];
-  arrayMsg.map((l) => {
+  arrayMsg.forEach((l) => {
     if (l == " ") {
       arrayCritp.push(l);
     } else {
       let posicao = alfabeto.indexOf(l);
-      let novaPosicao = (parseInt(posicao) + parseInt(numero)) % 26;
+      let novaPosicao = (parseInt(posicao) + parseInt(numero)) % 98;
       arrayCritp.push(alfabeto[novaPosicao]);
     }
   });
@@ -84,12 +59,12 @@ const criptografar = () => {
 const descriptografar = () => {
   let arrayMsg = texto.split("");
   let arrayCritp = [];
-  arrayMsg.map((l) => {
+  arrayMsg.forEach((l) => {
     if (l == " ") {
       arrayCritp.push(l);
     } else {
       let posicao = alfabeto.indexOf(l);
-      let novaPosicao = (parseInt(posicao) - parseInt(numero) + 26) % 26;
+      let novaPosicao = (parseInt(posicao) - parseInt(numero) + 98) % 98;
       arrayCritp.push(alfabeto[novaPosicao]);
     }
   });
