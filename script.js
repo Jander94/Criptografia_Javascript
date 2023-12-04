@@ -1,5 +1,5 @@
 const readline = require("readline");
-const { alfabetoCompleto } = require("./utils");
+const { caracteres } = require("./utils");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -9,8 +9,8 @@ let opcao;
 let texto;
 let numero;
 let textoCriptografado;
-const alfabeto = alfabetoCompleto;
-
+const tamanho = 157;
+const alfabeto = caracteres;
 rl.question("1 - Criptografar \n2 - Descriptografar\n", (opt) => {
   opcao = opt;
   if (opcao == 1) {
@@ -48,7 +48,7 @@ const criptografar = () => {
       arrayCritp.push(l);
     } else {
       let posicao = alfabeto.indexOf(l);
-      let novaPosicao = (parseInt(posicao) + parseInt(numero)) % 98;
+      let novaPosicao = (parseInt(posicao) + parseInt(numero)) % tamanho;
       arrayCritp.push(alfabeto[novaPosicao]);
     }
   });
@@ -64,7 +64,8 @@ const descriptografar = () => {
       arrayCritp.push(l);
     } else {
       let posicao = alfabeto.indexOf(l);
-      let novaPosicao = (parseInt(posicao) - parseInt(numero) + 98) % 98;
+      let novaPosicao =
+        (parseInt(posicao) - parseInt(numero) + tamanho) % tamanho;
       arrayCritp.push(alfabeto[novaPosicao]);
     }
   });
@@ -75,7 +76,7 @@ const descriptografar = () => {
 const gerarNum = (text) => {
   let n = 0;
   text?.split("").forEach((t) => {
-    if (alfabeto.indexOf(t) > n) n = alfabeto.indexOf(t);
+    if (alfabeto.indexOf(t) > n) n = (alfabeto.indexOf(t) + 10) % 10;
   });
   return n;
 };
