@@ -9,7 +9,7 @@ let opcao;
 let texto;
 let numero;
 let textoCriptografado;
-const tamanho = 157;
+const tamanho = caracteres.length;
 const alfabeto = caracteres;
 rl.question("1 - Criptografar \n2 - Descriptografar\n", (opt) => {
   opcao = opt;
@@ -76,7 +76,7 @@ const descriptografar = () => {
 const gerarNum = (text) => {
   let n = 0;
   text?.split("").forEach((t) => {
-    if (alfabeto.indexOf(t) > n) n = (alfabeto.indexOf(t) + 10) % 10;
+    if (alfabeto.indexOf(t) > n) n = (alfabeto.indexOf(t) + 20) % 20;
   });
   return n;
 };
